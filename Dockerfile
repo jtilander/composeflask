@@ -1,7 +1,7 @@
 
 FROM ubuntu:14.04
 
-MAINTAINER Phillip Bailey <phillip@bailey.st>
+MAINTAINER Jim Tilander
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -21,7 +21,8 @@ COPY uwsgi.ini /var/www/app/
 RUN mkdir -p /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-copy app /var/www/app
+EXPOSE 8888
+COPY app /var/www/app
 RUN pip install -r /var/www/app/requirements.txt
 
 

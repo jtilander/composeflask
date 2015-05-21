@@ -1,0 +1,21 @@
+dbdata:
+    image: busybox
+    command: /bin/true
+    volumes:
+        - /var/lib/postgresql
+db:
+    image: postgres:9.4.1
+    environment:
+        - POSTGRES_PASSWORD=passw0rd1
+    ports:
+        - 5432:5432
+    volumes_from:
+        - dbdata
+
+app:
+    build: .
+    hostname: debian
+    links:
+        - db:db
+    ports:
+        - 9090:8888
